@@ -13,7 +13,7 @@ public class Library {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public static boolean checkLibraryName(String libraryName) {
+    public static boolean validateLibraryName(String libraryName) {
         if(libraryName == null || libraryName.isBlank()){
             System.out.println("Library name cannot be empty.");
             return false;
@@ -25,7 +25,7 @@ public class Library {
         return true;
     }
 
-    public static boolean checkAddress(String address){
+    public static boolean validateAddress(String address){
         if(address.isBlank()){
             System.out.println("Address cannot be empty");
             return false;
@@ -38,7 +38,7 @@ public class Library {
         return true;
     }
 
-    public static boolean checkNumberOfEmployees(int numberOfEmployees){
+    public static boolean validateNumberOfEmployees(int numberOfEmployees){
         if(numberOfEmployees <= 0 || numberOfEmployees >= 50){
             System.out.println("The number of library employees must be greater than 0 and less than 10! Please try again!");
             return false;
