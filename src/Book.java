@@ -17,9 +17,10 @@ public class Book {
     private int takenPeriod;
     private int countOfTaken;
 
-    Book(String title, String publishing, int publishingYear, String ISBN, int pages
-            , boolean available, int countOfTaken){
+    Book(String title, List<String> authors, String publishing, int publishingYear, String ISBN, int pages
+            , boolean available, int countOfTaken) {
         this.title = title;
+        this.authors = authors;
         this.publishing = publishing;
         this.publishingYear = publishingYear;
         this.ISBN = ISBN;
@@ -139,7 +140,7 @@ public class Book {
         return true;
     }
 
-    public static boolean validateISBN(String ISBN){
+    public static boolean validateISBN(String ISBN) {
         if (ISBN.isBlank()) {
             System.out.println("ISBN number cannot be empty.");
             return false;
@@ -151,8 +152,16 @@ public class Book {
         return true;
     }
 
-    public static boolean validateCountOfTaken(int countOfTaken){
-        if(countOfTaken < 0){
+    public static boolean validatePages(int pages) {
+        if (pages < 0) {
+            System.out.println("The pages cannot be negative.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateCountOfTaken(int countOfTaken) {
+        if (countOfTaken < 0) {
             System.out.println("The count of taken cannot be negative");
             return false;
         }
