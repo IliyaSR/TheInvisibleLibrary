@@ -32,8 +32,8 @@ public class Main {
 
     }
 
-    private static void option(){
-        try(Scanner sc = new Scanner(System.in)){
+    private static void option() {
+        try (Scanner sc = new Scanner(System.in)) {
             System.out.println("1.Add book");
             System.out.println("2.Remove book");
             System.out.println("3.Search book");
@@ -43,13 +43,30 @@ public class Main {
 
             String option = sc.nextLine();
 
-            switch(option){
-                case "Add book", "1"-> addBook();
+            switch (option) {
+                case "Add book", "1" -> addBook();
+                case "Remove book", "2" -> removeBook();
             }
         }
     }
 
-    private static void addBook(){
+    private static void removeBook() {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter the name or ISBN number of the book you want to remove: ");
+            String input = sc.nextLine().toLowerCase();
+            for (Book book : books) {
+                if (book.title.toLowerCase().equals(input) || book.ISBN.equals(input)) {
+                    books.remove(book);
+                    System.out.println("Correctly remove book!");
+                } else {
+                    System.out.println("Book not found!");
+                }
+                option();
+            }
+        }
+    }
+
+    private static void addBook() {
         String title;
         String authors;
         String publishing;
@@ -61,43 +78,42 @@ public class Main {
         String available;
 
 
-
-        try(Scanner sc = new Scanner(System.in)){
-            do{
+        try (Scanner sc = new Scanner(System.in)) {
+            do {
                 System.out.print("Enter title of book: ");
                 title = sc.nextLine();
-            }while(!Book.validateTitle(title));
-            do{
+            } while (!Book.validateTitle(title));
+            do {
                 System.out.print("Enter author/s: ");
                 authors = sc.nextLine();
-            }while(!Book.validateAuthor(authors));
-            do{
+            } while (!Book.validateAuthor(authors));
+            do {
                 System.out.print("Enter publishing: ");
                 publishing = sc.nextLine();
-            }while(!Book.validatePublishing(publishing));
-            do{
+            } while (!Book.validatePublishing(publishing));
+            do {
                 System.out.print("Enter publishing year: ");
                 publishingYear = Integer.parseInt(sc.nextLine());
-            }while(!Book.validatePublishingYear(publishingYear));
-            do{
+            } while (!Book.validatePublishingYear(publishingYear));
+            do {
                 System.out.print("Enter ISBN number: ");
                 ISBN = sc.nextLine();
-            }while(!Book.validateISBN(ISBN));
-            do{
+            } while (!Book.validateISBN(ISBN));
+            do {
                 System.out.print("Enter number of pages: ");
                 pages = Integer.parseInt(sc.nextLine());
-            }while(!Book.validatePages(pages));
+            } while (!Book.validatePages(pages));
             System.out.print("Is the book available? (yes/no):");
             available = sc.nextLine();
-            if(available.equals("yes")){
+            if (available.equals("yes")) {
                 isAvailable = true;
             }
-            do{
+            do {
                 System.out.print("Enter count of taken: ");
                 countOfTaken = Integer.parseInt(sc.nextLine());
-            }while(!Book.validateCountOfTaken(countOfTaken));
-            
-            Book book = new Book(title, authors, publishing, publishingYear, ISBN, pages, isAvailable,countOfTaken);
+            } while (!Book.validateCountOfTaken(countOfTaken));
+
+            Book book = new Book(title, authors, publishing, publishingYear, ISBN, pages, isAvailable, countOfTaken);
             books.add(book);
             System.out.println("The book is added!");
             option();
