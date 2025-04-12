@@ -46,22 +46,7 @@ public class Main {
             switch (option) {
                 case "Add book", "1" -> addBook();
                 case "Remove book", "2" -> removeBook();
-            }
-        }
-    }
-
-    private static void removeBook() {
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.print("Enter the name or ISBN number of the book you want to remove: ");
-            String input = sc.nextLine().toLowerCase();
-            for (Book book : books) {
-                if (book.title.toLowerCase().equals(input) || book.ISBN.equals(input)) {
-                    books.remove(book);
-                    System.out.println("Correctly remove book!");
-                } else {
-                    System.out.println("Book not found!");
-                }
-                option();
+                case "Search book", "3" -> searchBook();
             }
         }
     }
@@ -118,5 +103,82 @@ public class Main {
             System.out.println("The book is added!");
             option();
         }
+    }
+
+    private static void removeBook() {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter the name or ISBN number of the book you want to remove: ");
+            String input = sc.nextLine().toLowerCase();
+            for (Book book : books) {
+                if (book.title.toLowerCase().equals(input) || book.ISBN.equals(input)) {
+                    books.remove(book);
+                    System.out.println("Correctly remove book!");
+                } else {
+                    System.out.println("Book not found!");
+                }
+                option();
+            }
+        }
+    }
+
+    private static void searchBook() {
+        String title;
+        String author;
+        String publishingYear;
+        String ISBN;
+
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter how you'd like to search for the book: by title, author, publishing year, or ISBN number: ");
+            String searchWay = sc.nextLine().toLowerCase();
+            switch (searchWay) {
+                case ("title") -> {
+                    System.out.print("Enter title: ");
+                    title = sc.nextLine();
+                    searchBookCriteria("title", title);
+                }
+                case ("author") -> {
+                    System.out.print("Enter author: ");
+                    author = sc.nextLine();
+                    searchBookCriteria("author", author);
+                }
+                case ("publishing year") -> {
+                    System.out.print("Enter publishing year: ");
+                    publishingYear = sc.nextLine();
+                    searchBookCriteria("publishing year", publishingYear);
+                }
+                case ("isbn number") -> {
+                    System.out.print("Enter ISBN number: ");
+                    ISBN = sc.nextLine();
+                    searchBookCriteria("ISBN", ISBN);
+                }
+            }
+        }
+
+    }
+
+    private static void searchBookCriteria(String criteria, String input) {
+        for (Book book : books) {
+            if (getFieldValue(book, criteria).equals(input)) {
+                System.out.printf("%-15s %-15s %-15s %-20s %-15s %-15s\n", "Title",
+                        "Authors", "Publishing", "Publishing Year", "ISBN", "Pages");
+                System.out.println("-------------------------------------------------------------------------------------------");
+                System.out.printf("%-15s %-15s %-15s %-20d %-15s %-15s\n",
+                        book.title, book.authors, book.publishing, book.publishingYear, book.ISBN, book.pages);
+                option();
+            }else{
+                System.out.println("Not found book!");
+                option();
+            }
+        }
+    }
+
+    private static String getFieldValue(Book book, String criteria) {
+        return switch (criteria) {
+            case "title" -> book.title.toLowerCase();
+            case "author" -> book.authors.toLowerCase();
+            case "publishing year" -> String.valueOf(book.publishingYear);
+            case "ISBN" -> book.ISBN;
+            default -> null;
+        };
     }
 }
