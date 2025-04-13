@@ -48,6 +48,7 @@ public class Main {
                 case "Remove book", "2" -> removeBook();
                 case "Search book", "3" -> searchBook();
                 case "Update book", "4" -> updateBook();
+                case "List with books", "5" -> listOfBooks();
             }
         }
     }
@@ -240,5 +241,14 @@ public class Main {
             }
         }
 
+    }
+
+    private static void listOfBooks() {
+        for (Book book : books) {
+            System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-15s\n", "Title", "Author",
+                    "Publishing", "Publishing Year", "ISBN", "Pages", "Available", "Count of taken");
+            System.out.println(book);
+        }
+        option();
     }
 }
