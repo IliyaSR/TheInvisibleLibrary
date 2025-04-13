@@ -5,7 +5,7 @@ import java.util.List;
 public class Book {
     public String title;
     public String genre;
-    public List<String> authors = new ArrayList<>();
+    public String authors;
     public String publishing;
     public int publishingYear;
     public String ISBN;
@@ -17,7 +17,7 @@ public class Book {
     private int takenPeriod;
     private int countOfTaken;
 
-    Book(String title, List<String> authors, String publishing, int publishingYear, String ISBN, int pages
+    Book(String title, String authors, String publishing, int publishingYear, String ISBN, int pages
             , boolean available, int countOfTaken) {
         this.title = title;
         this.authors = authors;
@@ -29,7 +29,7 @@ public class Book {
         this.countOfTaken = countOfTaken;
     }
 
-    Book(String title, String genre, List<String> authors, String publishing, int publishingYear
+    Book(String title, String genre, String authors, String publishing, int publishingYear
             , String ISBN, int pages, String Language, boolean available, String takenDate,
          String returnDate, int takenPeriod, int countOfTaken) {
         this.title = title;
@@ -166,5 +166,10 @@ public class Book {
             return false;
         }
         return true;
+    }
+
+    public String toString() {
+        return String.format("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-15s", title, authors, publishing
+                , publishingYear, ISBN, pages, available, countOfTaken);
     }
 }
