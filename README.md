@@ -82,10 +82,11 @@ Copy
 
 /TheInvisibleLibrary
 │
-├── Book.java           // Class representing a book with all its properties
-├── Library.java        // Class representing the library with list of books
-├── Main.java           // Main application with logic and menu
-└── README.md           // Project documentation
+├── Book.java               // Class representing a book with all its properties
+├── Library.java            // Class representing the library with list of books
+├── LibraryManager.java     // Class representing CRUD operation over books     
+├── UserInterface.java      // Class representig User Interface 
+├── Main.java               // Main application
 
 Assignment Requirements
 
